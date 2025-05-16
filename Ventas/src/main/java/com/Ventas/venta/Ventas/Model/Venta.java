@@ -20,6 +20,8 @@ import lombok.NoArgsConstructor;
 
 public class Venta {
 
+
+    //Defife Id como PrimaryKey
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venta_seq")
     @SequenceGenerator(name = "venta_seq", sequenceName = "VENTA_SEQ", allocationSize = 1)
@@ -28,6 +30,10 @@ public class Venta {
 
     @Column(name = "Total",nullable = false)
     private Integer total;
+
+    @Column(name = "Id_producto",nullable = false)
+    private Long id_product;
+
 
 
 
