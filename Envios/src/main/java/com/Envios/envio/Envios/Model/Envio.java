@@ -38,5 +38,3 @@ public class Envio {
     @Column(name = "transportista",length = 100,nullable = false) 
     private String transportista;
 }
-
-
