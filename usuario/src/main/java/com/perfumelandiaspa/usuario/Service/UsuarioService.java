@@ -78,7 +78,7 @@ public class UsuarioService {
     }
 
     //buscar por ID
-    public Usuario buscarPorId(Long id)
+    public Usuario buscarPorId(int id)
     {
         return usuarioRepository.findById(id).orElse(null);
     }

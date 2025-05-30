@@ -14,7 +14,7 @@ import lombok.Data;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(unique = true, nullable = false)
     private String nombre; //aca iran los nombres de rol como "CLIENTE" o "VENDEDOR"

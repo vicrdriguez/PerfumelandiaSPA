@@ -32,7 +32,7 @@ public class UsuarioController {
     
     //GET /usuarios/{id}
     @GetMapping("/usuarios/{id}")
-    public ResponseEntity<?> getUsuario(@PathVariable Long id)
+    public ResponseEntity<?> getUsuario(@PathVariable int id)
     {
         Usuario usuario = usuarioService.buscarPorId(id);
         if (usuario == null) {

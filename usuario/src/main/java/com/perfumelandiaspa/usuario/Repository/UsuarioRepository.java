@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.perfumelandiaspa.usuario.Model.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
     boolean existsByNombreUsuario(String nombreUsuario);
     boolean existsByGmail(String gmail);
     Usuario findByNombreUsuario(String nombreUsuario);
