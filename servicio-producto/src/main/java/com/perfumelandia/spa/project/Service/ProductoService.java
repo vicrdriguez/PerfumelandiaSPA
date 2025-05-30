@@ -24,6 +24,7 @@ public class ProductoService {
                 prodNew.setNombre(producto.getNombre());
                 prodNew.setPrecio(producto.getPrecio());
                 prodNew.setIdMarca(producto.getIdMarca());
+                prodNew.setIdCategoria(producto.getIdCategoria());
 
                 productoRepository.save(prodNew);
                 return "Producto creado correctamente";

@@ -57,7 +57,7 @@ public class ProductosController {
         }
     }
 
-    @GetMapping("productos/{nombreCategoria}")
+    @GetMapping("productos/buscarCategoria/{nombreCategoria}")
     public ResponseEntity<List<ProductoEntity>> listarPorCategoria(@PathVariable String nombreCategoria){
         List<ProductoEntity> lista = productoService.listarPorCategoria(nombreCategoria);
         if (lista != null){
@@ -67,7 +67,7 @@ public class ProductosController {
         }
     }
 
-    @GetMapping("productos/{nombreMarca}")
+    @GetMapping("productos/buscarMarca/{nombreMarca}")
     public ResponseEntity<List<ProductoEntity>> listarPorMarca(@PathVariable String nombreMarca){
         List<ProductoEntity> lista = productoService.listarPorMarca(nombreMarca);
         if (lista != null){
