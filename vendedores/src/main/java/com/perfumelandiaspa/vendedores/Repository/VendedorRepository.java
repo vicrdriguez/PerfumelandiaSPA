@@ -8,4 +8,8 @@ import com.perfumelandiaspa.vendedores.Model.Entity.VendedorEntity;
 
 public interface VendedorRepository extends JpaRepository<VendedorEntity, Long>{
     List<VendedorEntity> findBySucursal(String sucursal); //para el endpoint de sucursal en postman
+
+    boolean existsById(int idVendedor);
+
+
 }

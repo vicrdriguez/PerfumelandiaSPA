@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vendedor {
-    private Long id;
+
+    private int idVendedor;
     private String sucursal;
     private Double metaMensual;
-    //usuarioId creo q no va
 
 }

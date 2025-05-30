@@ -1,8 +1,8 @@
 package com.perfumelandiaspa.vendedores.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perfumelandiaspa.vendedores.Model.Vendedor;
@@ -14,40 +14,28 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class VendedorService {
+
+    @Autowired
     private final VendedorRepository vendedorRepository;
 
-    //Convertir Entity a DTO
-    private Vendedor toDto(VendedorEntity entity)
-    {
-        return new Vendedor(
-            entity.getId(),
-            entity.getSucursal(),
-            entity.getMetaMensual()
-        );
-    }
+    //Crear Cliente
+public String crearVendedor(Vendedor vendedor) {
+    try {
 
-    //Crear vendedor
-    public Vendedor crearVendedor(Vendedor vendedorRequest)
-    {
-        VendedorEntity entidad = new VendedorEntity();
-        entidad.setSucursal(vendedorRequest.getSucursal());
-        entidad.setMetaMensual(vendedorRequest.getMetaMensual());
 
-        VendedorEntity savedEntity = vendedorRepository.save(entidad);
-        return toDto(savedEntity);
+        VendedorEntity vendedorNuevo = new VendedorEntity();
+        // vendedorNuevo.setIdVendedor(vendedor.getIdVendedor()); // Asigna el ID manual
+        vendedorNuevo.setMetaMensual(vendedor.getMetaMensual());
+        vendedorNuevo.setSucursal(vendedor.getSucursal());
+        
+        vendedorRepository.save(vendedorNuevo);
+        return "Vendedor creado con éxito";
+    } catch (Exception e) {
+        return "Error al crear Vendedor: " + e.getMessage();
     }
+}
 
-    //Buscar por ID
-    public Vendedor buscarPorId(Long Id)
-    {
-        return vendedorRepository.findById(Id).map(this::toDto).orElse(null);
-    }
-
-    //Buscar por sucursal
-    public List<Vendedor> buscarPorSucursal(String sucursal)
-    {
-        return vendedorRepository.findBySucursal(sucursal).stream().map(this::toDto).collect(Collectors.toList());
-    }
+    
 
     
 }

@@ -8,38 +8,29 @@ import com.perfumelandiaspa.vendedores.Service.VendedorService;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController //el controlador trabaja con un REST
-@RequestMapping("/vendedores")
+@RequestMapping("/crearVendedor")
 @RequiredArgsConstructor
 public class VendedorController {
-
-    private final VendedorService vendedorService;
+    @Autowired
+    private VendedorService vendedorService;
 
     @PostMapping
-    public ResponseEntity<Vendedor> crearVendedor(@RequestBody Vendedor vendedor)
-    {
-        return ResponseEntity.ok(vendedorService.crearVendedor(vendedor));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Vendedor> buscarPorId(@PathVariable Long id)
-    {
-        Vendedor vendedor = vendedorService.buscarPorId(id);
-        return vendedor != null ? ResponseEntity.ok(vendedor) : ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/sucursal/{nombre}")
-    public ResponseEntity<List<Vendedor>> buscarPorSucursal(@PathVariable String nombre)
-    {
-        return ResponseEntity.ok(vendedorService.buscarPorSucursal(nombre));
+    public ResponseEntity<String> crearVendedor(@RequestBody Vendedor vendedor) {
+        String resultado = vendedorService.crearVendedor(vendedor);
+        
+        if (resultado.startsWith("Error")) {
+            return ResponseEntity.badRequest().body(resultado); // HTTP 400 si hay error
+        } else {
+            return ResponseEntity.ok(resultado); // HTTP 200 si es exitoso
+        }
     }
     
 }
