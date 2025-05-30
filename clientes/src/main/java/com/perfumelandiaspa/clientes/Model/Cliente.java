@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class Cliente {
 
-    private Long id;
+    private int id;
 
     private String rut;
 
@@ -22,7 +22,7 @@ public class Cliente {
 
     private int telefono;
 
-    private Long id_usuario;
+
 
     
     

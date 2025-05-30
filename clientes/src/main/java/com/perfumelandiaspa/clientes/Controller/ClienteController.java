@@ -36,10 +36,10 @@ public class ClienteController {
         return ResponseEntity.ok(clientes);
     }
 
-    @DeleteMapping("/eliminarPorId/{id}")
-    public ResponseEntity<String> eliminarPorId(@PathVariable Long id) {
+    @DeleteMapping("/eliminarPorId/{idCliente}")
+    public ResponseEntity<String> eliminarPorId(@PathVariable int idCliente) {
     try {
-        String resultado = clienteService.eliminarPorId(id);
+        String resultado = clienteService.eliminarPorId(idCliente);
         if (resultado.equals("No existe un cliente con el ID proporcionado")) {
             return ResponseEntity.notFound().build();
         }
@@ -49,10 +49,10 @@ public class ClienteController {
     }
 }
 
-    @PutMapping("/actualizarCliente/{id}")
-    public ResponseEntity<String> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+    @PutMapping("/actualizarCliente/{idCliente}")
+    public ResponseEntity<String> actualizarCliente(@PathVariable int idCliente, @RequestBody Cliente cliente) {
     try {
-        String resultado = clienteService.actualizarCliente(id, cliente);
+        String resultado = clienteService.actualizarCliente(idCliente, cliente);
         if (resultado.equals("No existe un cliente con el ID proporcionado")) {
             return ResponseEntity.notFound().build();
         }

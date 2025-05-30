@@ -2,19 +2,21 @@ package com.perfumelandiaspa.clientes.Model.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 
+
+
+@Table(name = "Cliente")
 @Entity
 @Data
 public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int idCliente;
 
     @Column(name="rut_cliente", nullable = false, unique = true)
     private String rut;
@@ -29,7 +31,7 @@ public class ClienteEntity {
     private String direccion;
 
     @Column(name="telefono", nullable = true)
-    private Integer telefono;
+    private int telefono;
 
     // relacion de  Uno a muchos
     // @OneToOne
