@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor // Construye Constructores Getters and Setters
+@NoArgsConstructor // Construye Constructor vacio
 
 public class Cliente {
 

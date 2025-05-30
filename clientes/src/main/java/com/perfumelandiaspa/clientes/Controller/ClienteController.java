@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/clientes")
+@RequestMapping("/cliente") //define una ruta Base para los endspoints del controlador
 @RestController
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping("/CrearCliente")
+    @PostMapping("/Crear")
     public ResponseEntity<String> CrearCliente(@RequestBody Cliente cliente){
-        return ResponseEntity.ok(clienteService.crearCliente(cliente));
+        return ResponseEntity.ok(clienteService.crearCliente(cliente)); // Retorna un mensaje y con estado HTTP 200 (OK)
     }
     
 
 
-    @GetMapping("/listarClientes")
+    @GetMapping("/listar")
     public ResponseEntity<List<ClienteEntity>> listarClientes() {
         List<ClienteEntity> clientes = clienteService.findAll();
         if (clientes.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();  // Retorna  una respuesta HTTP con código 204 No Content
         }
-        return ResponseEntity.ok(clientes);
+        return ResponseEntity.ok(clientes); // Retorna un mensaje y con estado HTTP 200 (OK)
     }
 
     @DeleteMapping("/eliminarPorId/{idCliente}")
@@ -43,7 +43,7 @@ public class ClienteController {
     try {
         String resultado = clienteService.eliminarPorId(idCliente);
         if (resultado.equals("No existe un cliente con el ID proporcionado")) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // Retorna  una respuesta HTTP con código 204 No Content
         }
         return ResponseEntity.ok(resultado);
     } catch (Exception e) {
@@ -51,26 +51,26 @@ public class ClienteController {
     }
 }
 
-    @PutMapping("/actualizarCliente/{idCliente}")
+    @PutMapping("/actualizarPorId/{idCliente}")
     public ResponseEntity<String> actualizarCliente(@PathVariable int idCliente, @RequestBody Cliente cliente) {
     try {
         String resultado = clienteService.actualizarCliente(idCliente, cliente);
         if (resultado.equals("No existe un cliente con el ID proporcionado")) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // Retorna  una respuesta HTTP con código 204 No Content
         }
-        return ResponseEntity.ok(resultado);
+        return ResponseEntity.ok(resultado); // Retorna un mensaje y con estado HTTP 200 (OK)
     } catch (Exception e) {
         return ResponseEntity.internalServerError().body("Error al actualizar cliente: " + e.getMessage());
     }
 }
 
-    @GetMapping("/clientesPorID/{idCliente}")
+    @GetMapping("/lisarPorId/{idCliente}")
     public ResponseEntity<ClienteEntity> buscarClienteID(@PathVariable Integer idCliente) {
         try {
             ClienteEntity cliente = clienteService.buscarClienteID(idCliente);
-            return ResponseEntity.ok(cliente);  
+            return ResponseEntity.ok(cliente);  // Retorna un mensaje y con estado HTTP 200 (OK)
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();  
+            return ResponseEntity.notFound().build();  // Retorna  una respuesta HTTP con código 204 No Content
         }
     }
 

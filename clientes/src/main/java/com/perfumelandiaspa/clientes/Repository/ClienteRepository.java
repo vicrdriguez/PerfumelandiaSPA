@@ -13,5 +13,11 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity,Integer> 
     //Metodo de crearCliente
     boolean existsByRut(String rut);
 
+    //Metodo de validar Id existente
+    boolean existsById(int idCliente);
+
+    //metodo de borrar Por id
+    void deleteById(int idCliente);
+
 
 }

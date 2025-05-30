@@ -10,12 +10,12 @@ import lombok.Data;
 
 
 
-@Table(name = "Cliente")
-@Entity
+@Table(name = "Cliente") // @Anotacion TABLE le asigna un nombre a la tabla en la base de datos
+@Entity //Indica que esta clase  representa una tala en la base de datos
 @Data
 public class ClienteEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Esta @anotación permite que el campo id sea auto incremental
     private int idCliente;
 
     @Column(name="rut_cliente", nullable = false, unique = true)
@@ -32,10 +32,5 @@ public class ClienteEntity {
 
     @Column(name="telefono", nullable = true)
     private int telefono;
-
-    // relacion de  Uno a muchos
-    // @OneToOne
-    // @JoinColumn(name = "Usuario_id", nullable =  true)
-    // private Long id_usuario;
 
 }
