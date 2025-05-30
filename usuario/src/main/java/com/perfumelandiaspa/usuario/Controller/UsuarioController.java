@@ -1,5 +1,6 @@
 package com.perfumelandiaspa.usuario.Controller;
 
+//import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.perfumelandiaspa.usuario.Model.Usuario;
 import com.perfumelandiaspa.usuario.Service.UsuarioService;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/autenticar")
@@ -48,4 +50,19 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(usuarioService.listarPorRol(tipo));
     }
+
+    //DELETE /eliminarUsuario
+    @PostMapping("/eliminarUsuario")
+    public ResponseEntity<String> eliminarPorCorreo(@RequestBody Map<String, String> request)
+    {
+        //aca se extrae el campo gmail del JSON
+        String gmail = request.get("gmail");
+        //valida que no este vacio
+        if (gmail == null || gmail.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("El campo 'gmail' es requerido");
+        }
+        //llama al Service para eliminar
+        return usuarioService.eliminarUsuarioPorCorreo(gmail);
+    }
+    
 }

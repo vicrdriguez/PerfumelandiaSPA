@@ -11,4 +11,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     boolean existsByGmail(String gmail);
     Usuario findByNombreUsuario(String nombreUsuario);
     List<Usuario> findByRolNombre(String nombreRol);
+    void deleteByGmail(String gmail);
+    Usuario findByGmail(String gmail);
 }

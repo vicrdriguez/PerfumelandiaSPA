@@ -18,6 +18,8 @@ import com.perfumelandiaspa.usuario.Repository.UsuarioRepository;
 // import java.util.Map;
 // import java.util.HashMap;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UsuarioService {
     
@@ -87,7 +89,24 @@ public class UsuarioService {
         return usuarioRepository.findByRolNombre(nombreRol);
     }
 
+    //metodo para elimiar por correo
+    @Transactional
+    public ResponseEntity<String> eliminarUsuarioPorCorreo(String gmail)
+    {
+        try {
+            //aca se verifica si el usuario existe
+            Usuario usuario = usuarioRepository.findByGmail(gmail);
+            if (!usuarioRepository.existsByGmail(gmail)) {
+                return ResponseEntity.badRequest().body("No existe un usuario con ese correo :(");
+            }
 
+            //si no, se elimina al usuario
+            usuarioRepository.delete(usuario);
+            return ResponseEntity.ok("Usuario eliminado exitosamente");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al eliminar el usuario: " + e.getMessage());
+        }
+    }
 
     // private final String vendedores = "http://localhost:8081/vendedores/por-usuario";
 
