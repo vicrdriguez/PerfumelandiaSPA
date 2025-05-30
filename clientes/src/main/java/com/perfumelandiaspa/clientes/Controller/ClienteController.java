@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("/clientes")
 @RestController
 public class ClienteController {
     @Autowired
@@ -61,6 +63,16 @@ public class ClienteController {
         return ResponseEntity.internalServerError().body("Error al actualizar cliente: " + e.getMessage());
     }
 }
+
+    @GetMapping("/clientesPorID/{idCliente}")
+    public ResponseEntity<ClienteEntity> buscarClienteID(@PathVariable Integer idCliente) {
+        try {
+            ClienteEntity cliente = clienteService.buscarClienteID(idCliente);
+            return ResponseEntity.ok(cliente);  
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();  
+        }
+    }
 
     
 }

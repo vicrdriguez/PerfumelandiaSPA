@@ -87,4 +87,9 @@ public class ClienteService {
     }
 }
 
+
+    public ClienteEntity buscarClienteID(int idCliente){
+        return clienteRepository.findById(idCliente).get();
+    }
+
 }

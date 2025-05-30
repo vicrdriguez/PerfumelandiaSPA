@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class Cliente {
 
-    private int id;
+    private int idCliente;
 
     private String rut;
 
