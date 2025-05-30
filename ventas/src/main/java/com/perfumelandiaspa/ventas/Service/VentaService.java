@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.perfumelandiaspa.ventas.Model.Venta;
 import com.perfumelandiaspa.ventas.Model.Entity.VentaEntity;
@@ -13,8 +14,10 @@ import com.perfumelandiaspa.ventas.Repository.VentaRepository;
 @Service
 public class VentaService {
 
+
     @Autowired
     private VentaRepository ventaRepository;
+    private RestTemplate restTemplate;
 
 
 
@@ -42,6 +45,16 @@ public class VentaService {
             return "Error al crear la venta " + e.getMessage();
         }
     }
+
+    
+    // public String obtenerDataDeCliente(){
+
+    //     private String URLcliente = "http://localhost:8081/Clientes/clientesPorID/{idCliente}"
+
+    // }
+
+
+
 
 
     //Metodo para buscar pod id de la venta
