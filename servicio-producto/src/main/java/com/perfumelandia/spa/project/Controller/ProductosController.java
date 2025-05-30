@@ -76,4 +76,10 @@ public class ProductosController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/productosPorId")
+    public ResponseEntity<List<ProductoEntity>> productosPorId(@RequestBody List<Integer> ids){
+        List<ProductoEntity> productos = productoService.buscarPorIds(ids);
+        return ResponseEntity.ok(productos);
+    } 
 }

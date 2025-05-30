@@ -101,4 +101,12 @@ public class ProductoService {
         "Popeye", 50
 
     );
+
+    public List<ProductoEntity> buscarPorIds(List<Integer> ids){
+        List<ProductoEntity> productos = productoRepository.findAllById(ids);
+        return(productos);
+
+
+        
+    }
 }
