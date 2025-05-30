@@ -18,7 +18,7 @@ public class VendedorService {
     @Autowired
     private final VendedorRepository vendedorRepository;
 
-    //Crear Cliente
+    //Crear vendedor
 public String crearVendedor(Vendedor vendedor) {
     try {
 
@@ -35,7 +35,29 @@ public String crearVendedor(Vendedor vendedor) {
     }
 }
 
-    
+    //Buscar por id
+    public VendedorEntity buscarClienteID(int idVendedor){
+        return vendedorRepository.findById(idVendedor).get();
+    }
 
+
+    //Metodo para Eliminar vendedor por id
+    public String eliminarPorId(int idVendedor) {
+
+        //En caso de error
+        try {
+            if (!vendedorRepository.existsById(idVendedor)) {
+                return "No existe un cliente con el Id proporcionado";
+            }
+            
+            vendedorRepository.deleteById(idVendedor);
+            return "Cliente eliminado correctamente";
+        } catch (Exception e) {
+            return "Error al eliminar cliente: " + e.getMessage();
+        }
+    }
+
+
+    
     
 }
