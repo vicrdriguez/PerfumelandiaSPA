@@ -16,6 +16,7 @@ public class Boleta {
     
     
     private ClienteDto cliente;
+    private VendedorDto vendedor;
     private List<ProductoDTO> productos;
     private double total;
     

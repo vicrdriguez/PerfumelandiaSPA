@@ -2,10 +2,9 @@ package com.perfumelandiaspa.ventas.Service;
 
 
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 
-import org.apache.tomcat.util.http.parser.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -17,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import com.perfumelandiaspa.ventas.Model.Boleta;
 import com.perfumelandiaspa.ventas.Model.ClienteDto;
 import com.perfumelandiaspa.ventas.Model.ProductoDTO;
+import com.perfumelandiaspa.ventas.Model.VendedorDto;
 import com.perfumelandiaspa.ventas.Model.VentaRequest;
 import com.perfumelandiaspa.ventas.Model.Entity.VentaEntity;
 import com.perfumelandiaspa.ventas.Repository.VentaRepository;
@@ -32,6 +32,7 @@ public class VentaService {
 
     private final String clienteServiceURL = "http://localhost:8081/clientes/clientesPorID";
     private final String productoServiceURL = "http://localhost:8083/productosPorId";
+    private final String vendedorServiceURL = "http://localhost:8082/vendedor/buscarVendedor";
 
 
 
@@ -43,7 +44,10 @@ public class VentaService {
     public Boleta generarBoleta(VentaRequest ventaRequest){
         //Obtiene la informacion de cliente
         String url = clienteServiceURL + "/" + ventaRequest.getIdCliente();
+        String urlVendedor = vendedorServiceURL + "/" + ventaRequest.getIdVendedor();
         ClienteDto cliente = restTemplate.getForObject(url, ClienteDto.class);
+        VendedorDto vendedor = restTemplate.getForObject(urlVendedor, VendedorDto.class);
+
 
         List<Integer> ids = ventaRequest.getProductos();
         List<ProductoDTO> productos = obtenerProductosPorIds(ids);
@@ -55,6 +59,7 @@ public class VentaService {
 
         Boleta boleta = new Boleta();
 
+            boleta.setVendedor(vendedor);
             boleta.setCliente(cliente);
             boleta.setProductos(productos);
             boleta.setTotal(totalRedondeado);
@@ -81,27 +86,4 @@ public class VentaService {
     return response.getBody();
     }
 
-
-
-
-    //Metodo para buscar pod id de la venta
-    // public List<Venta> buscarVentaPorCliente(Long idCliente){
-    //     try{
-
-    //         List<VentaEntity> ventaEntity = VentaRepository.findById(idCliente);
-    //         return ventaEntity.stream().map(
-    //             entidad  -> {
-                    
-
-    //             }
-
-
-    //         )
-
-
-    //     }
-    //     catch(Exception e){
-
-    //     }
-    // }
 }
